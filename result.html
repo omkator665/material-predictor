@@ -2,167 +2,48 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Material Analysis</title>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>Result</title>
 
 <style>
 body{
-  margin:0;
   font-family:Arial;
-  background:black;
-  color:white;
   text-align:center;
-}
-
-/* BACKGROUND */
-.bg{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(0,150,255,0.25), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(180,0,255,0.25), transparent 40%),
-    radial-gradient(circle at 50% 90%, rgba(0,255,200,0.15), transparent 40%),
-    linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)),
-    url('https://images.unsplash.com/photo-1581091215367-59ab6b4a3a85');
-  background-size:cover;
-  z-index:-1;
-}
-
-/* CARD */
-.card{
-  background:rgba(20,20,20,0.85);
-  padding:25px;
-  border-radius:15px;
-  margin:25px auto;
-  max-width:420px;
-  box-shadow:0 0 15px rgba(0,150,255,0.2);
-}
-
-/* TEXT */
-.title{
-  font-size:22px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.value{
-  font-size:18px;
-  margin:6px 0;
-}
-
-/* GRAPH */
-canvas{
-  background:white;
-  border-radius:10px;
-  margin-top:10px;
-}
-
-/* BUTTON */
-button{
-  padding:12px 20px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(90deg,#00c6ff,#7b2ff7);
+  background:#0f2027;
   color:white;
-  margin-top:20px;
+}
+
+.container{
+  margin-top:100px;
+}
+
+h1{
+  color:#00e6ff;
+}
+
+button{
+  padding:10px 20px;
+  background:#00e6ff;
+  border:none;
+  border-radius:8px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
+<div class="container">
+<h2>Best Material:</h2>
+<h1 id="output"></h1>
 
-<h2>📊 Material Analysis</h2>
-
-<div class="card" id="resultBox"></div>
-
-<!-- GRAPHS -->
-<div class="card"><h3>1. Stress vs Strength</h3><canvas id="c1"></canvas></div>
-<div class="card"><h3>2. Specific Strength</h3><canvas id="c2"></canvas></div>
-<div class="card"><h3>3. Temperature Effect</h3><canvas id="c3"></canvas></div>
-<div class="card"><h3>4. Strength Comparison</h3><canvas id="c4"></canvas></div>
-<div class="card"><h3>5. Density</h3><canvas id="c5"></canvas></div>
-<div class="card"><h3>6. Performance Index</h3><canvas id="c6"></canvas></div>
-
-<button onclick="finish()">Finish</button>
+<button onclick="back()">Back</button>
+</div>
 
 <script>
+document.getElementById("output").innerText=localStorage.getItem("result");
 
-// INPUT
-let data = JSON.parse(localStorage.getItem("data"));
-
-let f = parseFloat(data.force);
-let a = parseFloat(data.area);
-let t = parseFloat(data.temp || 25);
-
-let stress = f / a;
-
-// MATERIAL DATABASE
-const materials = [
-{name:"Plain Carbon Steel (40C8)", strength:380, density:7850, cost:80},
-{name:"Medium Carbon Steel (EN8)", strength:550, density:7850, cost:95},
-{name:"Alloy Steel (EN24)", strength:850, density:7850, cost:150},
-{name:"Aluminium Alloy (7075-T6)", strength:500, density:2810, cost:300},
-{name:"Aluminium Alloy (6061)", strength:310, density:2700, cost:250},
-{name:"Titanium Alloy (Ti-6Al-4V)", strength:817, density:4430, cost:1200},
-{name:"Stainless Steel (SS316)", strength:290, density:8000, cost:200},
-{name:"Copper Alloy (C110)", strength:220, density:8960, cost:700},
-{name:"Tool Steel (D2)", strength:700, density:7700, cost:350},
-{name:"Magnesium Alloy (AZ31)", strength:260, density:1770, cost:500}
-];
-
-// SELECT BEST
-let best = materials.reduce((a,b)=> a.strength>b.strength?a:b);
-
-// TEMPERATURE EFFECT
-let adjusted = best.strength * (1 - 0.002*(t-25));
-
-// COST STATUS
-let costLimit = 500;
-let costStatus = "Safe";
-
-if(stress > best.strength || best.cost > costLimit){
-  costStatus = "Not Safe";
+function back(){
+  window.location.href="return.html";
 }
-
-// OUTPUT
-document.getElementById("resultBox").innerHTML = `
-<div class="title">Material: ${best.name}</div>
-
-<div class="value"><b>Stress:</b> ${stress.toFixed(2)} MPa</div>
-<div class="value"><b>Strength:</b> ${best.strength} MPa</div>
-<div class="value"><b>Density:</b> ${best.density} kg/m³</div>
-<div class="value"><b>Material Cost:</b> ₹${best.cost}/kg</div>
-
-<div class="value"><b>Adjusted Strength:</b> ${adjusted.toFixed(2)} MPa</div>
-
-<div class="value"><b>Cost Status:</b> 
-<span style="color:${costStatus=="Safe"?"#00ff88":"red"}">
-${costStatus}
-</span>
-</div>
-`;
-
-// GRAPHS
-new Chart(c1,{type:'bar',data:{labels:['Stress','Strength'],datasets:[{data:[stress,best.strength]}]}});
-new Chart(c2,{type:'bar',data:{labels:['Specific Strength'],datasets:[{data:[best.strength/best.density]}]}});
-new Chart(c3,{
-type:'line',
-data:{labels:[25,100,200,300],datasets:[{data:[
-best.strength,best.strength*0.9,best.strength*0.8,best.strength*0.7
-]}]}
-});
-new Chart(c4,{type:'bar',data:{labels:['Original','Adjusted'],datasets:[{data:[best.strength,adjusted]}]}});
-new Chart(c5,{type:'bar',data:{labels:['Density'],datasets:[{data:[best.density]}]}});
-new Chart(c6,{type:'bar',data:{labels:['Performance Index'],datasets:[{data:[best.strength/best.density]}]}});
-
-// FINISH
-function finish(){
-window.location.href="return.html";
-}
-
 </script>
 
 </body>
