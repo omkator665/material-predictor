@@ -2,32 +2,88 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Return</title>
+<title>Completed</title>
 
 <style>
 body{
+  margin:0;
   font-family:Arial;
-  background:#0f2027;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
   text-align:center;
 }
+
+.card{
+  width:90%;
+  max-width:400px;
+  background:rgba(0,0,0,0.6);
+  padding:25px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 20px rgba(0,255,200,0.2);
+}
+
+.tick{
+  font-size:60px;
+  color:#00ff99;
+  margin-bottom:10px;
+}
+
+h2{
+  margin:10px 0;
+}
+
+p{
+  color:#ccc;
+}
+
 button{
-  padding:12px;
-  background:#00e6ff;
+  margin-top:20px;
+  padding:12px 20px;
   border:none;
   border-radius:10px;
+  background:linear-gradient(90deg,#00ff99,#00c6ff);
+  color:black;
+  font-weight:bold;
+}
+
+.info{
+  margin-top:20px;
+  font-size:14px;
+  color:#ddd;
 }
 </style>
 </head>
 
 <body>
 
-<h2>Run Again?</h2>
-<button onclick="home()">Home</button>
+<div class="card">
+
+<div class="tick">✔</div>
+
+<h2>Analysis Completed</h2>
+
+<p>Your material analysis has been successfully generated.</p>
+
+<button onclick="home()">Return to Home</button>
+
+<div class="info">
+<br><b>Group Members:</b><br>
+Mr. Om Katore
+<br><br>
+<b>Guided by:</b><br>
+Prof. S. Gadakh
+</div>
+
+</div>
 
 <script>
 function home(){
-window.location.href="index.html";
+  window.location.href="index.html";
 }
 </script>
 
