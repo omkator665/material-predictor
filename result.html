@@ -4,45 +4,96 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Result</title>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
-body{font-family:Arial;background:#111;color:white;text-align:center;}
-.container{margin:20px;}
+body{
+  font-family:Arial;
+  background:#111;
+  color:white;
+  text-align:center;
+}
+.container{
+  width:90%;
+  max-width:600px;
+  margin:auto;
+}
 .card{
   background:rgba(255,255,255,0.08);
-  padding:15px;margin:10px;border-radius:10px;
+  margin:10px;
+  padding:10px;
+  border-radius:10px;
 }
-h1{color:#00e6ff;}
-button{padding:10px;background:#00e6ff;border:none;border-radius:8px;}
+button{
+  padding:10px;
+  margin:5px;
+  background:#00e6ff;
+  border:none;
+  border-radius:8px;
+}
+canvas{
+  background:white;
+  border-radius:10px;
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-<h2>Top Material Recommendations</h2>
+<h2>Top Results</h2>
+
 <div id="list"></div>
 
+<canvas id="chart"></canvas>
+
+<br>
+<button onclick="downloadPDF()">Download PDF</button>
 <button onclick="back()">Back</button>
+
 </div>
 
 <script>
-let data = JSON.parse(localStorage.getItem("results"));
+let data=JSON.parse(localStorage.getItem("results"));
 let html="";
 
-for(let i=0;i<3;i++){
-  let m=data[i];
-  html+=`
-  <div class="card">
-    <h3>#${i+1} ${m.name}</h3>
-    <p>Score: ${m.score}</p>
-    <p>Strength:${m.data.s} | Weight:${m.data.w} | Cost:${m.data.c}</p>
-    <p>Corrosion:${m.data.cor} | Temp:${m.data.t}</p>
-  </div>`;
-}
+let labels=[],scores=[];
+
+data.slice(0,3).forEach((m,i)=>{
+html+=`<div class="card"><h3>#${i+1} ${m.name}</h3><p>Score: ${m.score}</p></div>`;
+labels.push(m.name);
+scores.push(m.score);
+});
 
 document.getElementById("list").innerHTML=html;
 
-function back(){ window.location.href="return.html"; }
+// Chart
+new Chart(document.getElementById("chart"),{
+type:'bar',
+data:{
+labels:labels,
+datasets:[{label:'Score',data:scores}]
+}
+});
+
+// PDF
+function downloadPDF(){
+const {jsPDF}=window.jspdf;
+let doc=new jsPDF();
+
+doc.text("Material Selection Result",10,10);
+
+data.slice(0,3).forEach((m,i)=>{
+doc.text(`${i+1}. ${m.name} - Score: ${m.score}`,10,20+(i*10));
+});
+
+doc.save("result.pdf");
+}
+
+function back(){
+window.location.href="return.html";
+}
 </script>
 
 </body>
