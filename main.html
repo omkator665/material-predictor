@@ -2,37 +2,69 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Input</title>
+<title>Enter Requirements</title>
 
 <style>
 body{
+  margin:0;
   font-family:Arial;
-  background:#0f2027;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color:white;
-  text-align:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
 }
+
 .container{
   width:90%;
-  max-width:500px;
-  margin:auto;
+  max-width:420px;
 }
-.box{
+
+h1{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.card{
   background:rgba(255,255,255,0.08);
   padding:20px;
-  margin:10px;
-  border-radius:10px;
+  border-radius:15px;
+  backdrop-filter:blur(10px);
 }
+
+label{
+  display:block;
+  margin-top:12px;
+  margin-bottom:5px;
+  font-size:14px;
+  color:#ccc;
+  text-align:left;
+}
+
 select{
   width:100%;
-  padding:10px;
-  margin:8px;
-}
-button{
   padding:12px;
-  width:100%;
-  background:#00e6ff;
-  border:none;
   border-radius:10px;
+  border:none;
+  outline:none;
+  font-size:15px;
+}
+
+button{
+  margin-top:20px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:bold;
+  background:linear-gradient(90deg,#00e6ff,#00ff99);
+  color:black;
+}
+
+button:active{
+  transform:scale(0.98);
 }
 </style>
 </head>
@@ -40,17 +72,49 @@ button{
 <body>
 
 <div class="container">
-<h2>Enter Requirements</h2>
 
-<div class="box">
-<select id="strength"><option value="1">Low Strength</option><option value="2">Medium</option><option value="3">High</option></select>
-<select id="weight"><option value="3">Light</option><option value="2">Medium</option><option value="1">Heavy OK</option></select>
-<select id="cost"><option value="3">Low Cost</option><option value="2">Medium</option><option value="1">High Budget</option></select>
-<select id="corrosion"><option value="1">Low</option><option value="2">Medium</option><option value="3">High</option></select>
-<select id="temp"><option value="1">Low</option><option value="2">Medium</option><option value="3">High</option></select>
-</div>
+<h1>Enter Requirements</h1>
+
+<div class="card">
+
+<label>Strength</label>
+<select id="strength">
+<option value="1">Low</option>
+<option value="2">Medium</option>
+<option value="3">High</option>
+</select>
+
+<label>Weight Preference</label>
+<select id="weight">
+<option value="3">Light</option>
+<option value="2">Medium</option>
+<option value="1">Heavy OK</option>
+</select>
+
+<label>Budget</label>
+<select id="cost">
+<option value="3">Low Cost</option>
+<option value="2">Medium</option>
+<option value="1">High Budget</option>
+</select>
+
+<label>Corrosion Resistance</label>
+<select id="corrosion">
+<option value="1">Low</option>
+<option value="2">Medium</option>
+<option value="3">High</option>
+</select>
+
+<label>Temperature Resistance</label>
+<select id="temp">
+<option value="1">Low</option>
+<option value="2">Medium</option>
+<option value="3">High</option>
+</select>
 
 <button onclick="calculate()">Analyze</button>
+
+</div>
 </div>
 
 <script>
