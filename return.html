@@ -2,102 +2,32 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Analysis Complete</title>
+<title>Return</title>
 
 <style>
 body{
-  margin:0;
   font-family:Arial;
-  background:black;
-  color:white;
   text-align:center;
+  background:#111;
+  color:white;
 }
 
-/* BACKGROUND */
-.bg{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(0,150,255,0.25), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(180,0,255,0.25), transparent 40%),
-    radial-gradient(circle at 50% 90%, rgba(0,255,200,0.15), transparent 40%),
-    linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)),
-    url('https://images.unsplash.com/photo-1581091215367-59ab6b4a3a85');
-  background-size:cover;
-  z-index:-1;
-}
-
-/* CARD */
-.container{
-  margin-top:20vh;
-  background:rgba(20,20,20,0.85);
-  padding:25px;
-  border-radius:15px;
-  max-width:400px;
-  margin-left:auto;
-  margin-right:auto;
-  box-shadow:0 0 20px rgba(0,150,255,0.2);
-}
-
-/* SUCCESS */
-.tick{
-  font-size:60px;
-  color:#00ff88;
-  text-shadow:0 0 15px rgba(0,255,136,0.8);
-}
-
-/* BUTTON */
 button{
-  padding:12px 20px;
+  padding:10px 20px;
+  background:#00e6ff;
   border:none;
-  border-radius:10px;
-  background:linear-gradient(90deg,#00ff88,#00c6ff);
-  color:black;
-  font-weight:bold;
-  margin-top:20px;
-}
-
-/* ABOUT SMALL */
-.about{
-  margin-top:25px;
-  font-size:13px;
-  color:#ccc;
-  line-height:1.6;
+  border-radius:8px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-
-<div class="container">
-
-<div class="tick">✔</div>
-
-<h2>Analysis Completed</h2>
-
-<p>Your material analysis has been successfully generated.</p>
-
-<button onclick="goHome()">Return to Home</button>
-
-<div class="about">
-
-<b>Group Members:</b><br>
-Mr. Pawar Subham Raju (469)<br>
-Mr. Rumane Pratik Dnyaneshwar (470)<br>
-Mr. Ayan Shaikh (471)<br>
-Miss. Anjali Shinde (472)<br><br>
-
-<b>Guided by:</b><br>
-Dr. K. Dagale
-
-</div>
-
-</div>
+<h2>Want to try again?</h2>
+<button onclick="home()">Go Home</button>
 
 <script>
-function goHome(){
+function home(){
   window.location.href="index.html";
 }
 </script>
