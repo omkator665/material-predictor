@@ -5,45 +5,44 @@
 <title>Result</title>
 
 <style>
-body{
-  font-family:Arial;
-  text-align:center;
-  background:#0f2027;
-  color:white;
+body{font-family:Arial;background:#111;color:white;text-align:center;}
+.container{margin:20px;}
+.card{
+  background:rgba(255,255,255,0.08);
+  padding:15px;margin:10px;border-radius:10px;
 }
-
-.container{
-  margin-top:100px;
-}
-
-h1{
-  color:#00e6ff;
-}
-
-button{
-  padding:10px 20px;
-  background:#00e6ff;
-  border:none;
-  border-radius:8px;
-}
+h1{color:#00e6ff;}
+button{padding:10px;background:#00e6ff;border:none;border-radius:8px;}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-<h2>Best Material:</h2>
-<h1 id="output"></h1>
+<h2>Top Material Recommendations</h2>
+<div id="list"></div>
 
 <button onclick="back()">Back</button>
 </div>
 
 <script>
-document.getElementById("output").innerText=localStorage.getItem("result");
+let data = JSON.parse(localStorage.getItem("results"));
+let html="";
 
-function back(){
-  window.location.href="return.html";
+for(let i=0;i<3;i++){
+  let m=data[i];
+  html+=`
+  <div class="card">
+    <h3>#${i+1} ${m.name}</h3>
+    <p>Score: ${m.score}</p>
+    <p>Strength:${m.data.s} | Weight:${m.data.w} | Cost:${m.data.c}</p>
+    <p>Corrosion:${m.data.cor} | Temp:${m.data.t}</p>
+  </div>`;
 }
+
+document.getElementById("list").innerHTML=html;
+
+function back(){ window.location.href="return.html"; }
 </script>
 
 </body>
