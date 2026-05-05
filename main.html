@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  color:white;
+  text-align:center;
+  background:black;
+}
+
+/* SAME BACKGROUND */
+.bg{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0,150,255,0.25), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(180,0,255,0.25), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(0,255,200,0.15), transparent 40%),
+    linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)),
+    url('https://images.unsplash.com/photo-1581091215367-59ab6b4a3a85');
+  background-size:cover;
+  z-index:-1;
+}
+
+h2{
+  margin-top:12vh;
+  text-shadow:0 0 10px rgba(0,150,255,0.6);
+}
+
+/* CARD */
+.container{
+  background:rgba(20,20,20,0.8);
+  padding:20px;
+  border-radius:15px;
+  max-width:400px;
+  margin:30px auto;
+  box-shadow:0 0 15px rgba(0,150,255,0.2);
+}
+
+/* INPUT */
+input,select{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+  border:none;
+  background:#111;
+  color:white;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#00c6ff,#7b2ff7);
+  color:white;
+  font-size:16px;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 15px rgba(0,150,255,0.6);
+}
+
+/* FOOTER */
+.footer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  padding:10px;
+  color:#aaa;
+  background:black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<h2>Enter Input Values</h2>
+
+<div class="container">
+
+<input id="force" placeholder="Force (N)">
+<input id="area" placeholder="Area (mm²)">
+<input id="temp" placeholder="Temperature (°C)">
+
+<select id="app">
+<option value="">Select Application</option>
+<option>Automotive</option>
+<option>Aerospace</option>
+<option>Structural</option>
+<option>Marine</option>
+<option>Biomedical</option>
+<option>Tooling</option>
+<option>Thermal</option>
+<option>Electrical</option>
+<option>Heavy Load</option>
+<option>Lightweight</option>
+</select>
+
+<button onclick="run()">Predict</button>
+
+</div>
+
+<div class="footer">
+Dept. Mechanical Engineering, AVCOE, Sangamner
+</div>
+
+<script>
+function run(){
+let f=document.getElementById("force").value;
+let a=document.getElementById("area").value;
+let t=document.getElementById("temp").value;
+let app=document.getElementById("app").value;
+
+if(!f||!a||!app){alert("Enter all values");return;}
+
+localStorage.setItem("data",JSON.stringify({force:f,area:a,temp:t,app:app}));
+
+window.location.href="result.html";
+}
+</script>
+
+</body>
+</html>
