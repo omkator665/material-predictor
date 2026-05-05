@@ -2,84 +2,79 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inputs</title>
+<title>Input</title>
 
 <style>
-body{font-family:Arial;background:#0f2027;color:white;text-align:center;}
-.container{margin:30px auto; width:90%; max-width:420px;}
-.box{background:rgba(255,255,255,0.08);padding:20px;border-radius:12px;margin:10px;}
-select,input{width:100%;padding:10px;margin:8px;border-radius:8px;border:none;}
-button{padding:12px;background:#00e6ff;border:none;border-radius:10px;width:100%;}
+body{
+  font-family:Arial;
+  background:#0f2027;
+  color:white;
+  text-align:center;
+}
+.container{
+  width:90%;
+  max-width:500px;
+  margin:auto;
+}
+.box{
+  background:rgba(255,255,255,0.08);
+  padding:20px;
+  margin:10px;
+  border-radius:10px;
+}
+select{
+  width:100%;
+  padding:10px;
+  margin:8px;
+}
+button{
+  padding:12px;
+  width:100%;
+  background:#00e6ff;
+  border:none;
+  border-radius:10px;
+}
 </style>
 </head>
 
 <body>
+
 <div class="container">
 <h2>Enter Requirements</h2>
 
 <div class="box">
-<label>Strength</label>
-<select id="strength">
-<option value="1">Low</option>
-<option value="2">Medium</option>
-<option value="3">High</option>
-</select>
-
-<label>Weight Preference</label>
-<select id="weight">
-<option value="3">Light</option>
-<option value="2">Medium</option>
-<option value="1">Heavy OK</option>
-</select>
-
-<label>Budget</label>
-<select id="cost">
-<option value="3">Low Cost</option>
-<option value="2">Medium</option>
-<option value="1">High Budget</option>
-</select>
-
-<label>Corrosion Resistance</label>
-<select id="corrosion">
-<option value="1">Low</option>
-<option value="2">Medium</option>
-<option value="3">High</option>
-</select>
-
-<label>Temperature Resistance</label>
-<select id="temp">
-<option value="1">Low</option>
-<option value="2">Medium</option>
-<option value="3">High</option>
-</select>
+<select id="strength"><option value="1">Low Strength</option><option value="2">Medium</option><option value="3">High</option></select>
+<select id="weight"><option value="3">Light</option><option value="2">Medium</option><option value="1">Heavy OK</option></select>
+<select id="cost"><option value="3">Low Cost</option><option value="2">Medium</option><option value="1">High Budget</option></select>
+<select id="corrosion"><option value="1">Low</option><option value="2">Medium</option><option value="3">High</option></select>
+<select id="temp"><option value="1">Low</option><option value="2">Medium</option><option value="3">High</option></select>
 </div>
 
 <button onclick="calculate()">Analyze</button>
 </div>
 
 <script>
-// Material database (scaled 1–3)
-const materials = [
- {name:"Steel", s:3,w:1,c:3,cor:1,t:3},
- {name:"Aluminum", s:2,w:3,c:2,cor:3,t:2},
- {name:"Titanium", s:3,w:3,c:1,cor:3,t:3},
- {name:"Cast Iron", s:3,w:1,c:3,cor:1,t:2},
- {name:"Plastic (ABS)", s:1,w:3,c:3,cor:3,t:1}
+const materials=[
+{name:"Steel",s:3,w:1,c:3,cor:1,t:3},
+{name:"Aluminum",s:2,w:3,c:2,cor:3,t:2},
+{name:"Titanium",s:3,w:3,c:1,cor:3,t:3},
+{name:"Cast Iron",s:3,w:1,c:3,cor:1,t:2},
+{name:"ABS Plastic",s:1,w:3,c:3,cor:3,t:1}
 ];
 
 function calculate(){
-  let S=+strength.value, W=+weight.value, C=+cost.value, CR=+corrosion.value, T=+temp.value;
+let S=+strength.value,W=+weight.value,C=+cost.value,CR=+corrosion.value,T=+temp.value;
 
-  let results = materials.map(m=>{
-    let score = (S*m.s + W*m.w + C*m.c + CR*m.cor + T*m.t);
-    return {name:m.name, score:score, data:m};
-  });
+let results=materials.map(m=>{
+return{name:m.name,score:(S*m.s+W*m.w+C*m.c+CR*m.cor+T*m.t)};
+});
 
-  results.sort((a,b)=>b.score-a.score);
+results.sort((a,b)=>b.score-a.score);
 
-  localStorage.setItem("results", JSON.stringify(results));
-  window.location.href="result.html";
+localStorage.setItem("results",JSON.stringify(results));
+window.location.href="result.html";
 }
 </script>
+
 </body>
 </html>
