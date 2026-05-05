@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Material Predictor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Material Project</title>
 
 <style>
 body{
@@ -9,33 +10,84 @@ body{
   font-family:Arial;
   color:white;
   text-align:center;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+
+  background: linear-gradient(135deg, #141e30, #243b55);
 
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   height:100vh;
+
+  transform: translateY(-8%);
 }
 
+/* BACKGROUND */
+.bg{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0,255,255,0.2), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,0,150,0.2), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(0,255,100,0.15), transparent 40%);
+  z-index:-1;
+}
+
+/* TITLE */
 h1{
-  font-size:40px;
-  color:#00e6ff;
-  text-shadow:0 0 10px #00e6ff;
+  font-size:26px;
+  margin-bottom:25px;
+  color:#00f5ff;
+  text-shadow:0 0 12px rgba(0,245,255,0.7);
 }
 
-p{
-  font-size:18px;
-  color:#ccefff;
+/* CARD */
+.container{
+  background:rgba(255,255,255,0.08);
+  padding:25px;
+  border-radius:18px;
+  width:90%;
+  max-width:350px;
+
+  backdrop-filter: blur(12px);
+  box-shadow:0 0 25px rgba(0,255,255,0.2);
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+
+  background:linear-gradient(90deg,#00f5ff,#8f00ff);
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+button:hover{
+  opacity:0.9;
 }
 </style>
-
 </head>
 
 <body>
 
-<h1>Material Predictor</h1>
-<p>Website is working successfully</p>
+<div class="bg"></div>
+
+<h1>⚙️ Smart Material Selection & Analysis System</h1>
+
+<div class="container">
+  <button onclick="openApp()">Calculate</button>
+</div>
+
+<script>
+function openApp(){
+  window.location.href="main.html";
+}
+</script>
 
 </body>
 </html>
