@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Material Selector</title>
+<title>Smart Material Selector</title>
 
 <style>
 body{
@@ -10,49 +10,32 @@ body{
   font-family:Arial;
   color:white;
   text-align:center;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  display:flex; justify-content:center; align-items:center; height:100vh;
 }
-
-.container{
-  background:rgba(255,255,255,0.1);
-  padding:30px;
-  border-radius:15px;
-  backdrop-filter: blur(10px);
+.card{
+  background:rgba(255,255,255,0.08);
+  padding:30px; border-radius:16px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 25px rgba(0,0,0,0.5);
 }
-
-h1{
-  color:#00e6ff;
-}
-
+h1{ color:#00e6ff; }
 button{
-  padding:12px 20px;
-  background:#00e6ff;
-  border:none;
-  border-radius:10px;
-  font-size:16px;
+  padding:12px 22px; border:none; border-radius:10px;
+  background:#00e6ff; font-weight:bold;
 }
 </style>
 </head>
 
 <body>
-
-<div class="container">
-<h1>Smart Material Selector</h1>
-<p>Select best material based on requirements</p>
-<button onclick="start()">Start</button>
+<div class="card">
+  <h1>⚙️ Smart Material Selector</h1>
+  <p>Multi-criteria decision system</p>
+  <button onclick="start()">Start Analysis</button>
 </div>
 
 <script>
-function start(){
-  window.location.href="main.html";
-}
+function start(){ window.location.href="main.html"; }
 </script>
-
 </body>
 </html>
